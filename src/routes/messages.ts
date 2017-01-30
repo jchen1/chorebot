@@ -70,10 +70,10 @@ const handlers = {
             if (_.first(args) !== (chore as any)._id && _.first(args) !== 'all') {
               return cb(null, null);
             }
-            cb(null, { chore, user: _.find(DefaultUsers, { _id: (chore as any).turn }) });
+            cb(null, { chore, user: _.find(DefaultUsers, { _id: (chore as any).turn }) || {} });
           }, cb),
           (res, cb) => async.each(res, ({ chore, user }, cb) => {
-            if (user) return client.chat.postMessage(config.channel.id, `<@${user._id}> do the ${_.lowerCase(chore.name)}`, cb);
+            if (user._id) return client.chat.postMessage(config.channel.id, `<@${user._id}> do the ${_.lowerCase(chore.name)}`, cb);
             cb();
           }, cb)
         ], _.noop);
