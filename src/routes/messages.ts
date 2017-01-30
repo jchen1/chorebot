@@ -72,7 +72,7 @@ const handlers = {
             }
             cb(null, { chore, user: _.find(DefaultUsers, { _id: (chore as any).turn }) || {} });
           }, cb),
-          (res, cb) => async.each(res, ({ chore, user }, cb) => {
+          (res, cb) => async.each(_.compact(res), ({ chore, user }, cb) => {
             if (user._id) return client.chat.postMessage(config.channel.id, `<@${user._id}> do the ${_.lowerCase(chore.name)}`, cb);
             cb();
           }, cb)
