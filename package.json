@@ -1,0 +1,44 @@
+{
+  "name": "chorebot",
+  "version": "0.0.1",
+  "description": "chorebot",
+  "scripts": {
+    "tsc": "./node_modules/typescript/bin/tsc -p .",
+    "setup": "rm -rf dist && grunt style && npm run tsc",
+    "start": "rm -rf dist && npm run tsc && NODE_ENV=production grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jchen1/chorebot.git"
+  },
+  "author": "Jeff Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jchen1/chorebot/issues"
+  },
+  "homepage": "https://github.com/jchen1/chorebot#readme",
+  "devDependencies": {
+    "grunt-check-modules": "^1.1.0",
+    "grunt-run": "^0.6.0",
+    "grunt-tslint": "^4.0.0",
+    "tslint": "^4.4.2",
+    "tslint-eslint-rules": "^3.2.3",
+    "typescript": "^2.1.5"
+  },
+  "dependencies": {
+    "@slack/client": "^3.8.1",
+    "@types/async": "^2.0.38",
+    "@types/express": "^4.0.35",
+    "@types/lodash": "^4.14.51",
+    "@types/mongodb": "^2.1.37",
+    "async": "^2.1.4",
+    "express": "^4.14.1",
+    "grunt": "^1.0.1",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2",
+    "jit-grunt": "^0.10.0",
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.22"
+  }
+}
