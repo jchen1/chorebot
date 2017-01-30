@@ -83,7 +83,7 @@ const handlers = {
           cb => chores.find({}, { name: 1, turn: 1, lastFinished: 1 }).toArray(cb),
           (choreVals, cb) => {
             const text = _.join(_.map(choreVals, chore => {
-              const nextUser = _.find(DefaultUsers, { _id: userController.getNextUser((chore as any).turn) });
+              const nextUser = _.find(DefaultUsers, { _id: (chore as any).turn });
               return `${nextUser.name} is responsible for ${_.lowerCase((chore as any).name)} (last completed ${moment((chore as any).lastFinished).toString() || 'never'})`;
             }), '\n');
             client.chat.postMessage(message.channel, text, cb);
