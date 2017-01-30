@@ -48,7 +48,7 @@ const handlers = {
             const text = _.join(_.map(_.compact(nextChores), obj => {
               const chore = (obj as any).value;
               const nextUser = _.find(DefaultUsers, { _id: userController.getNextUser(chore.turn) });
-              return `<@${nextUser._id}|${nextUser.username}> is now responsible for ${_.lowerCase(chore.name)} (last completed ${moment(chore.lastFinished).toString() || 'never'})`;
+              return `<@${nextUser._id}> is now responsible for ${_.lowerCase(chore.name)} (last completed ${moment(chore.lastFinished).toString() || 'never'})`;
             }), '\n');
             async.parallel([
               cb => client.chat.postMessage(message.channel, text || 'No you didn\'t', cb),
@@ -73,7 +73,7 @@ const handlers = {
             cb(null, { chore, user: _.find(DefaultUsers, { _id: (chore as any).turn }) });
           }, cb),
           (res, cb) => async.each(res, ({ chore, user }, cb) => {
-            if (user) return client.chat.postMessage(config.channel.id, `<@${user._id}|${user.username}> do the ${_.lowerCase(chore.name)}`, cb);
+            if (user) return client.chat.postMessage(config.channel.id, `<@${user._id}> do the ${_.lowerCase(chore.name)}`, cb);
             cb();
           }, cb)
         ], _.noop);
