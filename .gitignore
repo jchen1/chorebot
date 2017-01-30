@@ -58,3 +58,4 @@ jspm_packages
 # dist
 dist
 keys.json
+.DS_Store

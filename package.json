@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "chorebot",
   "scripts": {
-    "tsc": "./node_modules/typescript/bin/tsc -p .",
-    "setup": "rm -rf dist && grunt style && npm run tsc",
-    "start": "rm -rf dist && npm run tsc && NODE_ENV=production grunt"
+    "tsc": "rm -rf dist && ./node_modules/typescript/bin/tsc -p .",
+    "setup": "grunt style && npm run tsc",
+    "start": "npm run tsc && NODE_ENV=production grunt"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,9 @@
     "@slack/client": "^3.8.1",
     "@types/async": "^2.0.38",
     "@types/express": "^4.0.35",
+    "@types/joi": "^10.0.0",
     "@types/lodash": "^4.14.51",
+    "@types/moment": "^2.13.0",
     "@types/mongodb": "^2.1.37",
     "async": "^2.1.4",
     "express": "^4.14.1",
@@ -37,8 +39,11 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-nodemon": "^0.4.2",
     "jit-grunt": "^0.10.0",
+    "joi": "^10.2.0",
     "lodash": "^4.17.4",
+    "moment": "^2.17.1",
     "mongodb": "^2.2.22",
+    "mongoskin": "^2.1.0",
     "typescript": "^2.1.5"
   }
 }
