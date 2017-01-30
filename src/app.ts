@@ -9,6 +9,6 @@ app.get('/', (req, res) => {
   res.status(200).send('<html><body>chorebot home</body></html>');
 });
 
-app.listen(4321, () => {
-  console.log('listening on 4321...');
+app.listen(3000, () => {
+  console.log('chorebot listening on port 3000...');
 });
