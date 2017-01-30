@@ -14,6 +14,12 @@ import * as userController from '../controllers/userController';
 
 const client = new WebClient(config.SLACK_API_TOKEN);
 
+function unknownMessage(channel) {
+  if (channel !== config.channel.id) {
+    return client.chat.postMessage(channel, 'Sorry, I didn\'t get that.', _.noop);
+  }
+}
+
 const handlers = {
   [RTM_EVENTS.MESSAGE]: message => {
     if (message.subtype && message.subtype === RTM_MESSAGE_SUBTYPES.BOT_MESSAGE) return;
@@ -94,7 +100,7 @@ const handlers = {
           _.noop);
         break;
       default:
-        client.chat.postMessage(message.channel, 'Sorry, I didn\'t get that.', _.noop);
+        unknownMessage(message.channel);
         break;
     }
   }
