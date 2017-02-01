@@ -1,8 +1,6 @@
-'use strict';
+import { MongoClient, Server } from 'mongodb';
 
-import * as mongoskin from 'mongoskin';
-
-const db = mongoskin.db('mongodb://localhost:27017/chorebot');
+const db = new MongoClient().connect('mongodb://localhost:27017/chorebot');
 
 export {
   db

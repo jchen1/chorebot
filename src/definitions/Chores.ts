@@ -1,8 +1,6 @@
-'use strict';
-
 import * as _ from 'lodash';
 
-const Chores = Object.freeze({
+const DefaultChores = Object.freeze({
   DISHES: {
     _id: 'dishes',
     name: 'Dishes',
@@ -18,5 +16,5 @@ const Chores = Object.freeze({
 });
 
 export {
-  Chores
+  DefaultChores
 };

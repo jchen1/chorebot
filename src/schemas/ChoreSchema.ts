@@ -1,5 +1,3 @@
-'use strict';
-
 import * as Joi from 'joi';
 import { DefaultUserIds } from '../definitions/Users';
 
