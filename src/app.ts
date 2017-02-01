@@ -19,22 +19,24 @@ rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
   console.log('Slack connection up...');
 });
 
-function initRoutes(cb) {
+function initRoutes() {
   _.each(routes, route => {
     const handlers = require(`./routes/${route}`).handlers;
     _.each(handlers, (handler, event) => {
       rtm.on(event, handler);
     });
   });
-  cb();
 }
 
-async.parallel([
-  cb => choreController.init(cb),
-  cb => userController.init(cb),
-  cb => initRoutes(cb)
-], err => {
-  if (err) console.log(`error initializing: ${err}`);
-  rtm.start();
-});
+(async function() {
+  try {
+    await choreController.init();
+    await userController.init();
+    initRoutes();
+    rtm.start();
+  } catch (err) {
+    console.error(`error initializing: ${err}`);
+    process.exit(1);
+  }
+})();
 

@@ -10,12 +10,15 @@ function getNextUser(id) {
   return DefaultUserIds[nextId] as string;
 }
 
-function init(cb) {
-  users.insertMany(_.map(DefaultUsers, _.identity), {}, (err, res) => {
-    if (err && err.code === 11000) {
-      return cb(null, res);
-    }
-    cb(err, res);
+function init(): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    users.insertMany(_.map(DefaultUsers, _.identity), {}, (err, res) => {
+      if (err.code && err.code !== 11000) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
   });
 }
 
