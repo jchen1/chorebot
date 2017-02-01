@@ -15,10 +15,6 @@ const routes = [
   'messages'
 ];
 
-rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, function (rtmStartData) {
-  console.log(rtmStartData);
-});
-
 rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
   console.log('Slack connection up...');
 });
