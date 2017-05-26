@@ -4,6 +4,7 @@ import { DefaultChores } from '../definitions/Chores';
 import * as choreModel from '../models/choreModel';
 import * as userController from './userController';
 import { Chore } from '../types/Chore';
+import * as config from '../config';
 
 async function init(): Promise<void> {
   const choreColl = await choreModel.init();
@@ -11,9 +12,14 @@ async function init(): Promise<void> {
     .catch(err => { if (err.code !== 11000) throw err; });
 }
 
-async function complete(choreId: string): Promise<Chore> {
+async function complete(userId: string, choreId: string): Promise<Chore> {
   const choreColl = await choreModel.init();
-  const chore = await choreModel.get(choreId);
+  const chore : Chore = await choreModel.get(choreId);
+
+  if (config.IS_PROD && chore.turn !== userId) {
+    throw new Error(`User ${userId} is not assigned to this chore!`);
+  }
+
   const updateObj = await choreColl.findOneAndUpdate({ _id: chore._id }, {
     $set: {
       lastFinished: Date.now(),
@@ -23,9 +29,9 @@ async function complete(choreId: string): Promise<Chore> {
   return updateObj.value;
 }
 
-async function completeAll(): Promise<Chore[]> {
+async function completeAll(userId: string): Promise<Chore[]> {
   const choreColl = await choreModel.init();
-  const originalChores = await choreModel.getAll();
+  const originalChores = _.filter(await choreModel.getAll(), chore => !config.IS_PROD || chore.turn === userId);
 
   const newChores: Chore[] = _.map(originalChores, chore => _.extend({}, chore, {
     lastFinished: Date.now(),

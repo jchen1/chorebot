@@ -8,8 +8,9 @@ import * as moment from 'moment';
 
 import * as choreModel from '../models/choreModel';
 import { getHandle } from '../controllers/userController';
+import { postMessage } from '../util/slackUtils';
 
-export async function process(client, channel: string, args: string[]): Promise<void> {
+export async function process(client, user, channel: string, args: string[]): Promise<void> {
   const chores = await choreModel.getAll();
 
   const message = _(chores)
@@ -21,5 +22,5 @@ export async function process(client, channel: string, args: string[]): Promise<
     })
     .join('\n');
 
-  await client.chat.postMessage(channel, message);
+  await postMessage(client, channel, message);
 }

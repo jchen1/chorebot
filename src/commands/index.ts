@@ -14,8 +14,8 @@ const commands = {
   remind
 };
 
-export async function processCommand(client, channel, command, args) {
+export async function processCommand(client, user, channel, command, args) {
   if (_.has(commands, command)) {
-    await commands[command].process(client, channel, args);
+    await commands[command].process(client, user, channel, args);
   }
 }

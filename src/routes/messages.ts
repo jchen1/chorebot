@@ -21,9 +21,10 @@ const handlers = {
   [RTM_EVENTS.MESSAGE]: async message => {
     if (_.includes(IGNORED_MESSAGE_TYPES, message.subtype)) return;
     const channelId = message.channel;
+    const user = _.find(DefaultUsers, { _id: message.user });
     const [command, ...args] = _.split(_.toLower(message.text), ' ');
 
-    commands.processCommand(client, channelId, command, args);
+    commands.processCommand(client, user, channelId, command, args);
   }
 };
 

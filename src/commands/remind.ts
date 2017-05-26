@@ -8,12 +8,13 @@ import * as moment from 'moment';
 
 import * as choreModel from '../models/choreModel';
 import { getHandle } from '../controllers/userController';
+import { postMessage } from '../util/slackUtils';
 
-export async function process(client, channel: string, args: string[]): Promise<void> {
+export async function process(client, user, channel: string, args: string[]): Promise<void> {
   const choreId = _.first(args);
 
   if (!_.includes(choreIds, choreId)) {
-    return await client.chat.postMessage(channel, `Sorry, I don't recognize that chore. Valid options are ${JSON.stringify(choreIds)}`);
+    return await postMessage(client, channel, `Sorry, I don't recognize that chore. Valid options are ${JSON.stringify(choreIds)}`);
   }
 
   const chores = (choreId === 'all') ?
@@ -30,5 +31,5 @@ export async function process(client, channel: string, args: string[]): Promise<
     })
     .join('\n');
 
-  await client.chat.postMessage(channel, message);
+  await postMessage(client, channel, message);
 }
