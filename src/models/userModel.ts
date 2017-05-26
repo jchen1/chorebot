@@ -1,7 +1,6 @@
 import { Collection } from 'mongodb';
 
 import * as async from 'async';
-import * as Joi from 'joi';
 import * as _ from 'lodash';
 
 import { db } from '../db';

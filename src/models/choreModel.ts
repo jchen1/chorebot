@@ -1,7 +1,6 @@
 import { Collection } from 'mongodb';
 import { Chore } from '../types/Chore';
 
-import * as Joi from 'joi';
 import * as _ from 'lodash';
 
 import { db } from '../db';
