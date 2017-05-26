@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
+import { User } from '../types/User';
 
-const DefaultUsers = Object.freeze({
+const DefaultUsers: Readonly<{ [user: string]: User }> = Object.freeze({
   ARJUN: {
     _id: 'U3X7JSU23',
     name: 'Arjun Rao',

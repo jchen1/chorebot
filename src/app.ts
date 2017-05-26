@@ -28,6 +28,8 @@ function initRoutes() {
 
 (async function() {
   try {
+    process.on('unhandledRejection', r => console.log(r));
+
     await choreController.init();
     await userController.init();
     initRoutes();

@@ -1,11 +1,11 @@
 {
   "name": "chorebot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "chorebot",
   "scripts": {
     "tsc": "rm -rf dist && ./node_modules/typescript/bin/tsc -p .",
     "setup": "grunt style && npm run tsc",
-    "start": "npm run tsc && NODE_ENV=production grunt"
+    "start": "npm run tsc && grunt"
   },
   "repository": {
     "type": "git",

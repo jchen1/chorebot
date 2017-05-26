@@ -15,6 +15,9 @@ const DefaultChores = Object.freeze({
   }
 });
 
+const choreIds = _.concat(_.map<{ Chore }, string>(DefaultChores, '_id'), 'all');
+
 export {
-  DefaultChores
+  DefaultChores,
+  choreIds
 };

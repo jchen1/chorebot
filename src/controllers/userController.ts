@@ -1,6 +1,8 @@
 import * as _ from 'lodash';
+import { User } from '../types/User';
 
 import { DefaultUsers, DefaultUserIds } from '../definitions/Users';
+import * as config from '../config';
 import * as userModel from '../models/userModel';
 
 function getNextUser(id) {
@@ -14,7 +16,12 @@ async function init(): Promise<void> {
     .catch(err => { if (err.code !== 11000) throw err; });
 }
 
+function getHandle(user: User) {
+  return config.IS_PROD ? `<@${user._id}>` : user.username;
+}
+
 export {
   getNextUser,
-  init
+  init,
+  getHandle
 };
