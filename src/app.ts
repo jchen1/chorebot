@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as async from 'async';
 
 import * as choreController from './controllers/choreController';
 import * as userController from './controllers/userController';
