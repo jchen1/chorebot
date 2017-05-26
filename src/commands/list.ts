@@ -17,7 +17,7 @@ export async function process(client, channel: string, args: string[]): Promise<
     .map(chore => {
       const user = _.find(DefaultUsers, { _id: chore.turn });
       const lastCompleted = moment(chore.lastFinished).format('MMM D') || 'never';
-      return `${getHandle(user)} is responsible for ${_.lowerCase(chore.name)}. (last completed ${lastCompleted}).`;
+      return `${user.name} is responsible for ${_.lowerCase(chore.name)}. (last completed ${lastCompleted}).`;
     })
     .join('\n');
 
