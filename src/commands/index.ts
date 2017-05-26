@@ -15,9 +15,7 @@ const commands = {
 };
 
 export async function processCommand(client, channel, command, args) {
-  if (!_.has(commands, command)) {
-    await client.chat.postMessage(channel, `Sorry, I didn't get that.`);
+  if (_.has(commands, command)) {
+    await commands[command].process(client, channel, args);
   }
-
-  commands[command].process(client, channel, args);
 }
