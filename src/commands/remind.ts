@@ -6,6 +6,7 @@ import { DefaultUsers } from '../definitions/Users';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
+import * as config from '../config';
 import * as choreModel from '../models/choreModel';
 import { getHandle } from '../controllers/userController';
 import { postMessage } from '../util/slackUtils';
@@ -31,5 +32,5 @@ export async function process(client, user, channel: string, args: string[]): Pr
     })
     .join('\n');
 
-  await postMessage(client, channel, message);
+  await postMessage(client, config.CHORES_CHANNEL.id, message);
 }

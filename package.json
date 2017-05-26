@@ -1,6 +1,6 @@
 {
   "name": "chorebot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "chorebot",
   "scripts": {
     "tsc": "rm -rf dist && ./node_modules/typescript/bin/tsc -p .",

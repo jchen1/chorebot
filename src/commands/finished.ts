@@ -6,12 +6,13 @@ import { DefaultUsers } from '../definitions/Users';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
+import * as config from '../config';
 import * as choreController from '../controllers/choreController';
 import * as choreModel from '../models/choreModel';
 import { getHandle } from '../controllers/userController';
 import { postMessage } from '../util/slackUtils';
 
-async function setTopic(client, channel: string) {
+async function setTopic(client) {
   const chores = await choreModel.getAll();
 
   const topic = _(chores)
@@ -23,7 +24,7 @@ async function setTopic(client, channel: string) {
     })
     .join(' | ');
 
-  await client.channels.setTopic(channel, topic);
+  await client.channels.setTopic(config.CHORES_CHANNEL.id, topic);
 }
 
 export async function process(client, user, channel: string, args: string[]): Promise<void> {
@@ -46,8 +47,11 @@ export async function process(client, user, channel: string, args: string[]): Pr
       })
       .join('\n');
 
+    if (_.isEmpty(message)) return;
+
     await postMessage(client, channel, message);
-    await setTopic(client, channel);
+    await postMessage(client, config.CHORES_CHANNEL.id, message);
+    await setTopic(client);
   } catch (e) {
     if (_.endsWith(e.message, 'not assigned to this chore!')) {
       return await postMessage(client, channel, `You aren't assigned to chore '${choreId}.'`);
