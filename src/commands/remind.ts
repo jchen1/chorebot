@@ -32,5 +32,5 @@ export async function process(client, user, channel: string, args: string[]): Pr
     })
     .join('\n');
 
-  await postMessage(client, config.CHORES_CHANNEL.id, message);
+  await postMessage(client, config.getChannelId(), message);
 }

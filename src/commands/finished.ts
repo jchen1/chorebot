@@ -24,7 +24,7 @@ async function setTopic(client) {
     })
     .join(' | ');
 
-  await client.channels.setTopic(config.CHORES_CHANNEL.id, topic);
+  await client.channels.setTopic(config.getChannelId(), topic);
 }
 
 export async function process(client, user, channel: string, args: string[]): Promise<void> {
@@ -50,7 +50,9 @@ export async function process(client, user, channel: string, args: string[]): Pr
     if (_.isEmpty(message)) return;
 
     await postMessage(client, channel, message);
-    await postMessage(client, config.CHORES_CHANNEL.id, message);
+    if (channel !== config.getChannelId()) {
+      await postMessage(client, config.getChannelId(), message);
+    }
     await setTopic(client);
   } catch (e) {
     if (_.endsWith(e.message, 'not assigned to this chore!')) {
